@@ -1,9 +1,9 @@
 
 public class Pokemon {
 
-	private final static int INITIAL_HEALTH = 301;
-	private final static int INITIAL_STRENGT = 51;
-	private final static int INITIAL_SPEED = 201;
+	private static final int INITIAL_HEALTH = 301;
+	private static final int INITIAL_STRENGT = 51;
+	private static final int INITIAL_SPEED = 201;
 	private int health;
 	private int strength;
 	private int speed;
