@@ -10,9 +10,9 @@ public class Pokemon {
 	private String name;
 
 	public Pokemon() {
-		this.health = (int) Math.random() * INITIAL_HEALTH;
-		this.strength = (int) Math.random() * INITIAL_STRENGT;
-		this.speed = (int) Math.random() * INITIAL_SPEED;
+		this.health = (int)(Math.random() * INITIAL_HEALTH);
+		this.strength = (int)(Math.random() * INITIAL_STRENGT);
+		this.speed = (int)(Math.random() * INITIAL_SPEED);
 		this.name = "";
 	}
 

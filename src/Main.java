@@ -19,7 +19,7 @@ public class Main {
 	}
 
 	private static void initPokemonsRandomly() {
-		for (int i = 0; i <= NUM_POKEMONS; i++) {
+		for (int i = 0; i < NUM_POKEMONS; i++) {
 			pokemons[i] = new Pokemon();
 			pokemons[i].setName("pokemon" + i);
 		}
@@ -38,7 +38,46 @@ public class Main {
 		System.out.println("Elige al pokemon al que desesas que se enfrente: ");
 		Pokemon dos = pokemons[scanner.nextInt() - 1];
 
-		Battle battle = new Battle();
-		battle.initBattle(uno, dos);
+		Battle.initBattle(uno, dos);
 	}
+
+	public static void main(String[] args) {
+		int seleccion = 1;
+		do {
+			System.out.println("Elija la opción:");
+			System.out.println("1. Utilizar los pokemons del juego");
+			System.out.println("2. Crear los pokemons aleatoriamente");
+			System.out.println("3. Salir");
+			while (!scanner.hasNextInt()) {
+				System.out.println("Debe ser un numero entero");
+				scanner.next();
+			}
+			seleccion = scanner.nextInt();
+			while (seleccion < 1 || seleccion > 3) {
+				System.out.println("Opción incorrecta");
+				while (!scanner.hasNextInt()) {
+					System.out.println("Debe ser un numero entero");
+					scanner.next();
+				}
+				seleccion = scanner.nextInt();
+			}
+			switch (seleccion) {
+			case 1:
+				initPokemons();
+				initCombat();
+				break;
+			case 2:
+				initPokemonsRandomly();
+				initCombat();
+				break;
+			case 3:
+				System.out.println("Fin de programa");
+				break;
+			default:
+				System.out.println("ERROR!!");
+				break;
+			}
+		} while (seleccion != 3);
+	}
+
 }
