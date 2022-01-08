@@ -3,6 +3,7 @@ import java.util.Scanner;
 public class Main {
 	private static final int NUM_POKEMONS = 5;
 	private static Pokemon[] pokemons = new Pokemon[NUM_POKEMONS];
+	private static Pokemon[] pokemonsRival = new Pokemon[NUM_POKEMONS];
 	private static Scanner scanner = new Scanner(System.in);
 
 	private static void initPokemons() {
@@ -25,9 +26,50 @@ public class Main {
 		}
 	}
 
+	private static void initPokemonsRival() {
+		for (int i = 0; i < NUM_POKEMONS; i++) {
+			pokemonsRival[i] = new Pokemon();
+			pokemonsRival[i].setName("pokemonRival" + i);
+		}
+	}
+
+	private static void initMultiPokemons() {
+		int seleccion = 0;
+		System.out.println("Elija la opción:");
+		System.out.println("1. Utilizar los pokemons del juego");
+		System.out.println("2. Crear los pokemons aleatoriamente");
+		while (!scanner.hasNextInt()) {
+			System.out.println("Debe ser un numero entero");
+			scanner.next();
+		}
+		seleccion = scanner.nextInt();
+		while (seleccion < 1 || seleccion > 2) {
+			System.out.println("Opción incorrecta");
+			while (!scanner.hasNextInt()) {
+				System.out.println("Debe ser un numero entero");
+				scanner.next();
+			}
+			seleccion = scanner.nextInt();
+		}
+		if (seleccion == 1) {
+			initPokemons();
+		} else {
+			initPokemonsRandomly();
+		}
+		initPokemonsRival();
+	}
+
 	private static void showPokemons() {
 		for (int i = 0; i < NUM_POKEMONS; i++) {
 			System.out.println((i + 1) + ". " + pokemons[i].getName());
+		}
+	}
+
+	private static void showActualizedPokemons() {
+		for (int i = 0; i < NUM_POKEMONS; i++) {
+			if (pokemons[i].getHealth() > 0) {
+				System.out.println((i + 1) + ". " + pokemons[i].getName());
+			}
 		}
 	}
 
@@ -41,19 +83,34 @@ public class Main {
 		Battle.initBattle(uno, dos);
 	}
 
+	private static void initMultiCombat() {
+		for (int i = 0; i < NUM_POKEMONS; i++) {
+			showActualizedPokemons();
+			System.out.println("Elige tu siguiente pokemon: ");
+			Pokemon seleccionado = pokemons[scanner.nextInt() - 1];
+
+			Battle.initBattle(seleccionado, pokemonsRival[i]);
+			if (pokemonsRival[i].getHealth() > 0) {
+				i--;
+			}
+		}
+
+	}
+
 	public static void main(String[] args) {
 		int seleccion = 1;
 		do {
 			System.out.println("Elija la opción:");
 			System.out.println("1. Utilizar los pokemons del juego");
 			System.out.println("2. Crear los pokemons aleatoriamente");
-			System.out.println("3. Salir");
+			System.out.println("3. Comenzar una batalla equipo vs equipo");
+			System.out.println("4. Salir");
 			while (!scanner.hasNextInt()) {
 				System.out.println("Debe ser un numero entero");
 				scanner.next();
 			}
 			seleccion = scanner.nextInt();
-			while (seleccion < 1 || seleccion > 3) {
+			while (seleccion < 1 || seleccion > 4) {
 				System.out.println("Opción incorrecta");
 				while (!scanner.hasNextInt()) {
 					System.out.println("Debe ser un numero entero");
@@ -71,13 +128,17 @@ public class Main {
 				initCombat();
 				break;
 			case 3:
+				initMultiPokemons();
+				initMultiCombat();
+				break;
+			case 4:
 				System.out.println("Fin de programa");
 				break;
 			default:
 				System.out.println("ERROR!!");
 				break;
 			}
-		} while (seleccion != 3);
+		} while (seleccion != 4);
 	}
 
 }
