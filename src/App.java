@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class Main {
+public class App {
 	private static final int NUM_POKEMONS = 5;
 	private static final int FUEGO = 1;
 	private static final int AGUA = 2;

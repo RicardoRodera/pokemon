@@ -16,7 +16,7 @@ public class Battle {
 
 			System.out.println(pokemonRapido.getName() + " comienza el ataque contra " + pokemonLento.getName());
 
-			if (Main.isWeak(pokemonLento, pokemonRapido)) {
+			if (App.isWeak(pokemonLento, pokemonRapido)) {
 				pokemonLento.setHealth(pokemonLento.getHealth() - pokemonRapido.getStrength() * 2);
 				System.out.println(pokemonRapido.getName() + " daña " + (pokemonRapido.getStrength() * 2) + " a "
 						+ pokemonLento.getName() + " y a " + pokemonLento.getName() + " le queda "
@@ -28,7 +28,7 @@ public class Battle {
 						+ pokemonLento.getHealth() + " vida.");
 			}
 
-			if (Main.isWeak(pokemonRapido, pokemonLento)) {
+			if (App.isWeak(pokemonRapido, pokemonLento)) {
 				pokemonRapido.setHealth(pokemonRapido.getHealth() - pokemonLento.getStrength() * 2);
 				System.out.println(pokemonLento.getName() + " daña " + (pokemonLento.getStrength() * 2) + " a "
 						+ pokemonRapido.getName() + " y a " + pokemonRapido.getName() + " le queda "
