@@ -2,20 +2,24 @@ import java.util.Scanner;
 
 public class Main {
 	private static final int NUM_POKEMONS = 5;
+	private static final int FUEGO = 1;
+	private static final int AGUA = 2;
+	private static final int PLANTA = 3;
+	private static final int ELECTRICO = 4;
 	private static Pokemon[] pokemons = new Pokemon[NUM_POKEMONS];
 	private static Pokemon[] pokemonsRival = new Pokemon[NUM_POKEMONS];
 	private static Scanner scanner = new Scanner(System.in);
 
 	private static void initPokemons() {
-		Pokemon charizard = new Pokemon(100, 50, 50, "charizard");
+		Pokemon charizard = new Pokemon(100, 50, 50, "charizard", FUEGO);
 		pokemons[0] = charizard;
-		Pokemon blastoise = new Pokemon(150, 25, 150, "blastoire");
+		Pokemon blastoise = new Pokemon(150, 25, 150, "blastoise", AGUA);
 		pokemons[1] = blastoise;
-		Pokemon venusaur = new Pokemon(300, 10, 100, "venusaur");
+		Pokemon venusaur = new Pokemon(300, 10, 100, "venusaur", PLANTA);
 		pokemons[2] = venusaur;
-		Pokemon bulbasaur = new Pokemon(250, 20, 180, "bulbasaur");
+		Pokemon bulbasaur = new Pokemon(250, 20, 180, "bulbasaur", PLANTA);
 		pokemons[3] = bulbasaur;
-		Pokemon pikachu = new Pokemon(300, 40, 200, "pikachu");
+		Pokemon pikachu = new Pokemon(300, 40, 200, "pikachu", ELECTRICO);
 		pokemons[4] = pikachu;
 	}
 
@@ -141,4 +145,27 @@ public class Main {
 		} while (seleccion != 4);
 	}
 
+	public static boolean isWeak(Pokemon pokemon1, Pokemon pokemon2) { // Devuelve true si el tipo del pokemon 1 es
+																		// debil frente al tipo del pokemon 2
+		int tipo1 = pokemon1.getTipo();
+		int tipo2 = pokemon2.getTipo();
+		switch (tipo1) {
+		case FUEGO:
+			if (tipo2 == AGUA) {
+				return true;
+			}
+			break;
+		case AGUA:
+			if (tipo2 == PLANTA || tipo2 == ELECTRICO) {
+				return true;
+			}
+			break;
+		case PLANTA:
+			if (tipo2 == FUEGO) {
+				return true;
+			}
+			break;
+		}
+		return false;
+	}
 }

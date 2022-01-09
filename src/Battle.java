@@ -14,16 +14,32 @@ public class Battle {
 				pokemonLento = pokemon1;
 			}
 
-			pokemonLento.setHealth(pokemonLento.getHealth() - pokemonRapido.getStrength());
-			pokemonRapido.setHealth(pokemonRapido.getHealth() - pokemonLento.getStrength());
-
 			System.out.println(pokemonRapido.getName() + " comienza el ataque contra " + pokemonLento.getName());
-			System.out.println(
-					pokemonRapido.getName() + " daña " + pokemonRapido.getStrength() + " a " + pokemonLento.getName()
-							+ " y a " + pokemonLento.getName() + " le queda " + pokemonLento.getHealth() + " vida.");
-			System.out.println(
-					pokemonLento.getName() + " daña " + pokemonLento.getStrength() + " a " + pokemonRapido.getName()
-							+ " y a " + pokemonRapido.getName() + " le queda " + pokemonRapido.getHealth() + " vida.");
+
+			if (Main.isWeak(pokemonLento, pokemonRapido)) {
+				pokemonLento.setHealth(pokemonLento.getHealth() - pokemonRapido.getStrength() * 2);
+				System.out.println(pokemonRapido.getName() + " daña " + (pokemonRapido.getStrength() * 2) + " a "
+						+ pokemonLento.getName() + " y a " + pokemonLento.getName() + " le queda "
+						+ pokemonLento.getHealth() + " vida.");
+			} else {
+				pokemonLento.setHealth(pokemonLento.getHealth() - pokemonRapido.getStrength());
+				System.out.println(pokemonRapido.getName() + " daña " + pokemonRapido.getStrength() + " a "
+						+ pokemonLento.getName() + " y a " + pokemonLento.getName() + " le queda "
+						+ pokemonLento.getHealth() + " vida.");
+			}
+
+			if (Main.isWeak(pokemonRapido, pokemonLento)) {
+				pokemonRapido.setHealth(pokemonRapido.getHealth() - pokemonLento.getStrength() * 2);
+				System.out.println(pokemonLento.getName() + " daña " + (pokemonLento.getStrength() * 2) + " a "
+						+ pokemonRapido.getName() + " y a " + pokemonRapido.getName() + " le queda "
+						+ pokemonRapido.getHealth() + " vida.");
+			} else {
+				pokemonRapido.setHealth(pokemonRapido.getHealth() - pokemonLento.getStrength());
+				System.out.println(pokemonLento.getName() + " daña " + pokemonLento.getStrength() + " a "
+						+ pokemonRapido.getName() + " y a " + pokemonRapido.getName() + " le queda "
+						+ pokemonRapido.getHealth() + " vida.");
+
+			}
 		}
 
 		System.out.println("----------------------------------");
